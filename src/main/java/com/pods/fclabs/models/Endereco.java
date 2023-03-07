@@ -33,7 +33,7 @@ public class Endereco implements Serializable {
     private Morada morada;
     @ApiModelProperty(dataType = "String", example = "Numero da casa", required = true, position = 4)
     private String numero;
-    @ApiModelProperty(dataType = "String", example = "Complemento", required = false, position = 5)
+    @ApiModelProperty(dataType = "String", example = "Complemento", position = 5)
     private String complemento;
     @ApiModelProperty(dataType = "String", example = "Bairro do usuario", required = true, position = 6)
     private String bairro;
