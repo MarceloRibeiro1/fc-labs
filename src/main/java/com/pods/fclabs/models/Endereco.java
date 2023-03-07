@@ -25,7 +25,7 @@ public class Endereco implements Serializable {
     @ApiModelProperty(hidden = true)
     private UUID id;
 
-    @ApiModelProperty(dataType = "String", example = "Cep do usuario no formato xx.xxx-xxx ou xxxxxxxx", required = true, position = 1)
+    @ApiModelProperty(dataType = "String", example = "Cep do usuario no formato xx.xxx-xxx", required = true, position = 1)
     private String cep;
     @ApiModelProperty(dataType = "String", example = "Nome do logadouro", required = true, position = 2)
     private String logadouro;

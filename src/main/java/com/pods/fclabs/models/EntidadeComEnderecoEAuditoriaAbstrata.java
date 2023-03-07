@@ -17,7 +17,7 @@ public abstract class EntidadeComEnderecoEAuditoriaAbstrata {
     private Date dtCriacao;
     @ApiModelProperty(hidden = true)
     private Date dtUltAlteracao;
-    @ApiModelProperty(dataType = "Endereco", example = "Endereco do usuario", required = true, position = 4)
+    @ApiModelProperty(dataType = "Endereco", required = true, position = 4)
     @OneToOne(orphanRemoval = true)
     private Endereco endereco;
 
