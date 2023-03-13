@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
+import com.pods.fclabs.models.EnderecoResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import com.pods.fclabs.models.MsgRetorno;
 import com.pods.fclabs.models.Usuario;
 import com.pods.fclabs.models.UsuarioResponse;
 
+import static java.util.Objects.nonNull;
 
 
 @Service
@@ -153,7 +155,7 @@ public class Util {
 
 
     public static String formateDate(Date dateString) {
-        if (Objects.nonNull(dateString))
+        if (nonNull(dateString))
             return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateString);
 
         return StringUtils.EMPTY;
@@ -244,7 +246,7 @@ public class Util {
     public static void registraLog(Class classe, String exception, String method, String message, Object payload, LoggerInfoLevelEnum loggerLevel) {
         Logger log = LoggerFactory.getLogger(classe);
         String logMessage = MessageFormat.format("{0}.{1}(): {2} -> {3}", classe.getSimpleName(), method, exception, message);
-        if (Objects.nonNull(payload))
+        if (nonNull(payload))
             logMessage = MessageFormat.format(logMessage.concat("\nPayload: {0}")
                     , new GsonBuilder().setPrettyPrinting().create().toJson(payload));
 
@@ -263,6 +265,7 @@ public class Util {
         pr.setId(paciente.getId());
         pr.setNome(paciente.getNome());
         pr.setNomeMae(paciente.getNomeMae());
+        if (nonNull(paciente.getEndereco())) pr.setEndereco(new EnderecoResponse(paciente.getEndereco()));
      
         return pr;
     }
@@ -274,6 +277,7 @@ public class Util {
             pr.setId(listaUsuario.get(i).getId());
             pr.setNome(listaUsuario.get(i).getNome());
             pr.setNomeMae(listaUsuario.get(i).getNomeMae());
+            if (nonNull(listaUsuario.get(i).getEndereco())) pr.setEndereco(new EnderecoResponse(listaUsuario.get(i).getEndereco()));
             lista.add(pr);
 		}
     

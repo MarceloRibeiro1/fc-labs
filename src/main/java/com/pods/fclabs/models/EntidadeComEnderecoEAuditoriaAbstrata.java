@@ -3,9 +3,7 @@ package com.pods.fclabs.models;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,8 +15,8 @@ public abstract class EntidadeComEnderecoEAuditoriaAbstrata {
     private Date dtCriacao;
     @ApiModelProperty(hidden = true)
     private Date dtUltAlteracao;
-    @ApiModelProperty(dataType = "Endereco", required = true, position = 4)
-    @OneToOne(orphanRemoval = true)
+    @ApiModelProperty(dataType = "Endereco")
+    @OneToOne(orphanRemoval = true, fetch = FetchType.LAZY)
     private Endereco endereco;
 
     public abstract UUID getId();

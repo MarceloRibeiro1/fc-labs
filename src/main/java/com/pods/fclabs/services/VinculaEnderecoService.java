@@ -6,6 +6,7 @@ import com.pods.fclabs.models.EntidadeComEnderecoEAuditoriaAbstrata;
 import com.pods.fclabs.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import static java.util.Objects.nonNull;
 public class VinculaEnderecoService {
     @Autowired
     EnderecoService enderecoService;
-
+    @Transactional
     public <T extends EntidadeComEnderecoEAuditoriaAbstrata> T vinculaNovoEndereco(T entidade, Endereco endereco) {
         try {
             if (nonNull(endereco.getId()))
@@ -31,7 +32,7 @@ public class VinculaEnderecoService {
             throw e;
         }
     }
-
+    @Transactional
     public <T extends EntidadeComEnderecoEAuditoriaAbstrata> T atualizaEndereco(T entidade, Endereco endereco) {
         try {
             if (isNull(endereco.getId()))
@@ -47,7 +48,7 @@ public class VinculaEnderecoService {
             throw e;
         }
     }
-
+    @Transactional
     public <T extends EntidadeComEnderecoEAuditoriaAbstrata> T removeEndereco(T entidade) {
         if(entidade.getEndereco() == null)
             return entidade;
@@ -57,6 +58,7 @@ public class VinculaEnderecoService {
         entidade.setDtUltAlteracao(Util.formatarData(new Date()));
         return entidade;
     }
+    @Transactional
     public <T extends EntidadeComEnderecoEAuditoriaAbstrata> T ajustaEndereco(T entidade) {
         if(isNull(entidade.getEndereco())) {
             return removeEndereco(entidade);

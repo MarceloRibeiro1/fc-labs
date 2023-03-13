@@ -12,6 +12,7 @@ import com.pods.fclabs.models.Usuario;
 import com.pods.fclabs.models.UsuarioResponse;
 import com.pods.fclabs.repositories.UsuarioRepository;
 import com.pods.fclabs.util.Util;
+import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.Objects.isNull;
 
@@ -29,6 +30,7 @@ public class UsuarioService {
 	@Autowired
 	private ValidaCamposObrigatoriosService validaCamposObrigatorios;
 
+	@Transactional
 	public UsuarioResponse salva(Usuario usuario) throws UsuarioExistenteException {
 		try {
 
@@ -44,6 +46,7 @@ public class UsuarioService {
 		}
 	}
 
+	@Transactional
 	public UsuarioResponse atualiza(Usuario usuario) {
 		validaCamposObrigatorios.validaIdUsuario(usuario.getId());
 		validaCamposObrigatorios.validaCamposObrigatoriosUsuario(usuario);
@@ -61,10 +64,8 @@ public class UsuarioService {
 		return util.converteListUsuarioInResponse(usuarioRepository.findAll());
 	}
 	
-	public UsuarioResponse remove(UUID id) {
-		validaCamposObrigatorios.validaIdUsuario(id);
-		usuarioRepository.delete(usuarioRepository.getById(id));
-		return util.converteUsuarioInResponse(usuarioRepository.getById(id));
+	public void remove(UUID id) {
+		usuarioRepository.deleteById(id);
 	}
 
 
